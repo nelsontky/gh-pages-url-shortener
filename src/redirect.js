@@ -33,6 +33,4 @@ async function redirect() {
   }
 }
 
-(async () => {
-  redirect();
-})();
+redirect();
