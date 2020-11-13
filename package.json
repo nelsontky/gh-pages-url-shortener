@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d build",
-    "deploy": "npm run build && cp src/404.html build/ && cp src/index.html build/ && cp node_modules/@babel/polyfill/dist/polyfill.min.js build/ && gh-pages -d build"
+    "deploy": "npm run build && cp CNAME build/ && cp src/404.html build/ && cp src/index.html build/ && cp node_modules/@babel/polyfill/dist/polyfill.min.js build/ && gh-pages -d build"
   },
   "repository": {
     "type": "git",
