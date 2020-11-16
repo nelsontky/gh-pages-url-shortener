@@ -13,18 +13,14 @@
   try {
     const response = await fetch(GITHUB_ISSUES_LINK + issueNumber);
 
-    if (response.status !== 200) {
-      location.replace(homepage);
-      return;
+    if (!response.ok) {
+      throw new Error('issueNumber does not exist in gh issues or other error');
     }
 
     const payload = await response.json();
     let { message, title } = payload;
 
-    if (message === "Not Found") {
-      // issueNumber does not exist in gh issues
-      location.replace(homepage);
-    } else if (title) {
+    if ((message !== "Not Found") && title) {
       // Check if the title of issue is a legitimate URL
       const url = new URL(title);
 
@@ -34,13 +30,12 @@
         url.host === HOST
       ) {
         // Prevent recursive redirects and XSS
-        location.replace(homepage);
+        throw new Error('XSS');
       } else {
         location.replace(title);
       }
-    } else {
-      location.replace(homepage);
     }
+    throw new Error('issueNumber does not exist in gh issues');
   } catch (e) {
     location.replace(homepage);
   }
