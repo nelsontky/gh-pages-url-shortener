@@ -35,8 +35,7 @@ async function redirect() {
       }
     }
   } catch (e) {
-    console.log(e);
-    // location.replace(homepage);
+    location.replace(homepage);
   }
 }
 
