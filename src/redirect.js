@@ -15,6 +15,7 @@ async function redirect() {
 
     if (response.status !== 200) {
       location.replace(homepage);
+      return;
     }
 
     const payload = await response.json();
@@ -33,11 +34,9 @@ async function redirect() {
       } else {
         location.replace(title);
       }
-
     } else {
       location.replace(homepage);
     }
-    
   } catch (e) {
     location.replace(homepage);
   }
