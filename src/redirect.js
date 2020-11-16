@@ -1,16 +1,16 @@
 async function redirect() {
+  const location = window.location;
+  const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
+
+  const homepage =
+    location.protocol +
+    "//" +
+    location.hostname +
+    (location.port ? ":" + location.port : "") +
+    "/" +
+    location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
+
   try {
-    const location = window.location;
-    const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
-
-    const homepage =
-      location.protocol +
-      "//" +
-      location.hostname +
-      (location.port ? ":" + location.port : "") +
-      "/" +
-      location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
-
     const response = await fetch(GITHUB_ISSUES_LINK + issueNumber);
 
     if (response.status !== 200) {
@@ -18,14 +18,21 @@ async function redirect() {
     }
 
     const payload = await response.json();
-    const { message, title } = payload;
+    let { message, title } = payload;
+    title = JSON.stringify(title);
 
     if (message === "Not Found") {
       // issueNumber does not exist in gh issues
       location.replace(homepage);
     } else if (title) {
       // Check if the title of issue is a legitimate URL
-      new URL(title);
+      const url = new URL(title);
+
+      if (url.host === HOST) {
+        // Prevent recursive redirects
+        location.replace(homepage);
+      }
+
       location.replace(title);
     }
   } catch {
