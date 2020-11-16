@@ -19,7 +19,6 @@ async function redirect() {
 
     const payload = await response.json();
     let { message, title } = payload;
-    title = JSON.stringify(title);
 
     if (message === "Not Found") {
       // issueNumber does not exist in gh issues
@@ -28,15 +27,16 @@ async function redirect() {
       // Check if the title of issue is a legitimate URL
       const url = new URL(title);
 
-      if (url.host === HOST) {
-        // Prevent recursive redirects
+      if (url.protocol === "javascript:" || url.host === HOST) {
+        // Prevent recursive redirects and XSS
         location.replace(homepage);
+      } else {
+        location.replace(title);
       }
-
-      location.replace(title);
     }
-  } catch {
-    location.replace(homepage);
+  } catch (e) {
+    console.log(e);
+    // location.replace(homepage);
   }
 }
 
