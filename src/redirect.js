@@ -1,4 +1,4 @@
-async function redirect() {
+(async function redirect() {
   const location = window.location;
   const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
 
@@ -29,7 +29,8 @@ async function redirect() {
       const url = new URL(title);
 
       if (
-        (url.protocol !== "https:" && url.protocol !== "http:") ||
+        url.protocol !== "https:" ||
+        url.protocol !== "http:" ||
         url.host === HOST
       ) {
         // Prevent recursive redirects and XSS
@@ -43,6 +44,4 @@ async function redirect() {
   } catch (e) {
     location.replace(homepage);
   }
-}
-
-redirect();
+})();
