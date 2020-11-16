@@ -1,3 +1,10 @@
+function isUrl(url) {
+  // Regex from https://stackoverflow.com/a/3809435
+  return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
+    url
+  );
+}
+
 (async function redirect() {
   const location = window.location;
   const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
@@ -24,8 +31,9 @@
     if (message === "Not Found") {
       // issueNumber does not exist in gh issues
       location.replace(homepage);
-    } else if (title) {
-      // Check if the title of issue is a legitimate URL
+    } else if (!title || !isUrl(title)) {
+      location.replace(homepage);
+    } else {
       const url = new URL(title);
 
       if (
@@ -37,8 +45,6 @@
       } else {
         location.replace(title);
       }
-    } else {
-      location.replace(homepage);
     }
   } catch (e) {
     location.replace(homepage);
