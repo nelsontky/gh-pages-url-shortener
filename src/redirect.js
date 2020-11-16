@@ -33,7 +33,11 @@ async function redirect() {
       } else {
         location.replace(title);
       }
+
+    } else {
+      location.replace(homepage);
     }
+    
   } catch (e) {
     location.replace(homepage);
   }
