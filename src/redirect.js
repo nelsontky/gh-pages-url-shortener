@@ -29,8 +29,7 @@ async function redirect() {
       const url = new URL(title);
 
       if (
-        url.protocol !== "https:" ||
-        url.protocol !== "http:" ||
+        (url.protocol !== "https:" && url.protocol !== "http:") ||
         url.host === HOST
       ) {
         // Prevent recursive redirects and XSS
