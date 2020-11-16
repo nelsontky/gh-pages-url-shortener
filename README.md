@@ -28,7 +28,7 @@ This is a minimal URL shortener that can be entirely hosted on GitHub pages.
 ## How does this work
 
 _Thanks to @kidGodzilla for the pretty neat explanation
-[here](https://github.com/nelsontky/gh-pages-url-shortener/issues/5)._
+[here](https://github.com/nelsontky/gh-pages-url-shortener/issues/5#issuecomment-728040879)._
 
 > 1. CNAME points URL to `gh-pages` branch
 > 2. 404.html handles all requests
