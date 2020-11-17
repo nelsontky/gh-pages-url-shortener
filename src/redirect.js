@@ -1,4 +1,10 @@
 (function() {
+  function isUrl(url) {
+    // Regex from https://stackoverflow.com/a/3809435
+    return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
+      url
+    );
+  }
   const location = window.location;
   const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
 
@@ -19,7 +25,7 @@
         return response.json().then((payload) => {
             let { message, title } = payload;
 
-            if ((message !== "Not Found") && title) {
+            if ((message !== "Not Found") && (title || isUrl(title))) {
               // Check if the title of issue is a legitimate URL
               const url = new URL(title);
 
