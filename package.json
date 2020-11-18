@@ -1,0 +1,37 @@
+{
+  "name": "gh-pages-url-shortener",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .html,.js ."
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "plugins": [
+      "html"
+    ],
+    "extends": "semistandard",
+    "rules": {
+      "no-var": "off",
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never"
+        }
+      ],
+      "html/indent": 0
+    }
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-semistandard": "^15.0.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.1.0"
+  }
+}
