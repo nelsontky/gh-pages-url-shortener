@@ -3,80 +3,76 @@
   <head>
     <meta charset="utf-8" />
     <title>Redirecting...</title>
-    <script>
-      /**
-       * Configuration goes here
-       */
-      // Format: https://api.github.com/repos/{owner}/{repo}/issues/
-      var GITHUB_ISSUES_LINK =
-        "https://api.github.com/repos/nelsontky/gh-pages-url-shortener-db/issues/";
-      var PATH_SEGMENTS_TO_SKIP = 0;
-
-      /**
-       * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
-       */
-      function isUrl(url) {
-        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
-        return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
-          url
-        );
-      }
-
-      function redirect() {
-        var location = window.location;
-        var issueNumber = location.pathname.split("/")[
-          PATH_SEGMENTS_TO_SKIP + 1
-        ];
-
-        var homepage =
-          location.protocol +
-          "//" +
-          location.hostname +
-          (location.port ? ":" + location.port : "") +
-          "/" +
-          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
-
-        fetch(GITHUB_ISSUES_LINK + issueNumber)
-          .then(function (response) {
-            if (response.status !== 200) {
-              throw new Error(
-                "An error occurred with the GitHub API. Maybe you've exceeded your API limits (60 per hour)"
-              );
-            }
-
-            response
-              .json()
-              .then(function (payload) {
-                var message = payload.message;
-                var title = payload.title;
-
-                if (message !== "Not Found" && title && isUrl(title)) {
-                  // Check if the title of issue is a legitimate URL
-                  var url = new URL(title);
-                  if (
-                    (url.protocol !== "https:" && url.protocol !== "http:") ||
-                    url.host === location.host
-                  ) {
-                    // Prevent recursive redirects and XSS
-                    throw new Error("URL to redirect to is invalid!");
-                  } else {
-                    location.replace(title);
-                  }
-                } else {
-                  throw new Error("issueNumber does not exist in gh issues");
-                }
-              })
-              .catch(function () {
-                location.replace(homepage);
-              });
-          })
-          .catch(function () {
-            location.replace(homepage);
-          });
-      }
-
-      redirect();
-    </script>
   </head>
-  <body></body>
+  <body>
+    <script>
+      (function () {
+        /**
+         * Configuration goes here
+         */
+        var GITHUB_REPO = 'nelsontky/gh-pages-url-shortener-db';
+        var GITHUB_API_URL = 'https://api.github.com';
+
+        /**
+         * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
+         */
+        (function redirect() {
+          var home;
+          var issue;
+
+          var match = location.pathname.match(/^\/([^/]+)(?:\/([^/]+))?/);
+
+          if (/\.github\.io$/.test(location.hostname)) {
+            home = match[1];
+            issue = match[2];
+          } else {
+            home = '';
+            issue = match[1];
+          }
+
+          fetchIssue(issue)
+            .then(function (payload) {
+              var url = parseUrl(payload.title);
+              if (url && isAllowed(url)) {
+                return location.replace(url);
+              }
+              throw new Error('URL to redirect to is invalid!');
+            })
+            .catch(function () {
+              var homepage = new URL(home, location.origin);
+              location.replace(homepage);
+            });
+        }());
+
+        function isAllowed(url) {
+          if (url.host === location.host) {
+            return false;
+          }
+          return url.protocol === 'https:' || url.protocol === 'http:';
+        }
+
+        function fetchIssue(issue) {
+          var pathname = ['repos', GITHUB_REPO, 'issues', issue].join('/');
+          var issueUrl = new URL(pathname, GITHUB_API_URL);
+
+          return fetch(issueUrl).then(function (response) {
+            if (response.status === 200) {
+              return response.json();
+            }
+            throw new Error(
+              "An error occurred with the GitHub API. Maybe you've exceeded your API limits (60 per hour)"
+            );
+          });
+        }
+
+        function parseUrl(url) {
+          try {
+            return new URL(url);
+          } catch (err) {
+            return null;
+          }
+        }
+      }());
+    </script>
+  </body>
 </html>
