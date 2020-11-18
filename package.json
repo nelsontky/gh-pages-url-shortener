@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d build",
-    "deploy": "npm run build && cp CNAME build/ && cp src/404.html build/ && cp src/index.html build/ && cp node_modules/@babel/polyfill/dist/polyfill.min.js build/ && gh-pages -d build"
+    "deploy": "gh-pages -d src"
   },
   "repository": {
     "type": "git",
@@ -18,12 +17,6 @@
   },
   "homepage": "https://github.com/nelsontky/gh-pages-url-shortener#readme",
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
     "gh-pages": "^3.1.0"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.12.1"
   }
 }
