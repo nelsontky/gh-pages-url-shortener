@@ -1,6 +1,6 @@
 # GitHub Pages URL Shortener
 
-This is a minimal URL shortener that can be entirely hosted on GitHub pages.
+This is a minimal URL shortener that can be entirely hosted on GitHub pages. It does not need the maintenance of any servers or databases and can be hosted entirely on GitHub for free.
 
 [Yay! We got to the top of HN!](https://news.ycombinator.com/item?id=25110879)
 
