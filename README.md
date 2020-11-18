@@ -64,7 +64,7 @@ reliable or used in production. Do proceed at your own risk!
 1. `npm run deploy`, and your low cost and cool as heck URL shortener will be
    ready for use!
 
-# Featured forks
+## Featured forks
 
 To feature your fork here, edit this section and open a PR!
 
