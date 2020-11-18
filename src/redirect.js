@@ -1,10 +1,9 @@
 function isUrl(url) {
-  // Regex from https://regex101.com/r/wM8zuj/1
-  return /\bhttp(?:s)?(?::|;)\/\/(?!.+\.\.)(?'domain'.+?\..+?(?=\/|$| )).*?(?=$| )/.test(
+  // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
+  return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
     url
   );
 }
-
 (async function redirect() {
   const location = window.location;
   const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
