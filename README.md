@@ -36,7 +36,7 @@ _Thanks to @kidGodzilla for the pretty neat explanation
 >    via the JSON API, and redirects to the issue title, as a URL.
 > 4. Profit?
 
-## This is so cool! How can I use this?!
+## This is so cool! How can I use this with my own domain?!
 
 Disclaimer: This method of creating a URL shortener is hacky and not meant to be
 reliable or used in production. Do proceed at your own risk!
