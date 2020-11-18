@@ -61,7 +61,7 @@ reliable or used in production. Do proceed at your own risk!
    1. Update `var GITHUB_ISSUES_LINK = "<your-github-issues-link>";` at the top
       of `404.html` accordingly afterwards.
       1. Format for `GITHUB_ISSUES_LINK`:
-         https://api.github.com/repos/{owner}/{repo}/issues/
+         `https://api.github.com/repos/{owner}/{repo}/issues/`
       1. Remember the trailing `/`!
 1. Push your changes to your forked repo, and your low cost and cool as heck URL
    shortener will be ready for use!
