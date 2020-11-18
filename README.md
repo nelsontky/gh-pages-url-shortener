@@ -49,7 +49,7 @@ reliable or used in production. Do proceed at your own risk!
    1. <img src="https://i.imgur.com/kjinFX9.png" alt="How to create GitHub page" height="176px">
 1. If you are using your own domain:
    1. [Set your domain up for GitHub pages.](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)
-   1. Change the URL in `CNAME` to your domain.
+   1. Change the URL in `CNAME` file to your domain.
 1. If you are using GitHub page's default domain i.e. Something like
    `https://<username>.github.io/<repo-name>/`
    1. Delete the `CNAME` file.
