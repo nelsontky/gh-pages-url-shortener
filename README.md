@@ -25,7 +25,7 @@ This is a minimal URL shortener that can be entirely hosted on GitHub pages.
 1. There is no need for the pound symbol - short URLs look clean like this:
    `nlsn.cf/1` instead of looking like this: `nlsn.cf/#1`.
 
-## How does this work
+## How does this work?
 
 _Thanks to @kidGodzilla for the pretty neat explanation
 [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/5#issuecomment-728040879)._
@@ -68,6 +68,6 @@ reliable or used in production. Do proceed at your own risk!
 
 To feature your fork here, edit this section and open a PR!
 
-1. [eexit/s](https://github.com/eexit/s) - Created a bash script that allows for
-   shortening of URLs straight on the command line! Check out his script
-   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
+- [eexit/s](https://github.com/eexit/s) - Created a bash script that allows for
+  shortening of URLs straight on the command line! Check out his script
+  [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
