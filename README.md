@@ -42,12 +42,6 @@ Disclaimer: This method of creating a URL shortener is hacky and not meant to be
 reliable or used in production. Do proceed at your own risk!
 
 1. Fork the repo before cloning your fork.
-
-1. `npm run install`
-   1. I know that for such a small project, the usage of `node` is a bit of an
-      overkill. However, `node` is only involved in the deployment process,
-      namely using the `gh-pages` module to push the `src/` folder to the
-      `gh-pages` branch.
 1. If you are using your own domain:
    1. [Set your domain up for GitHub pages.](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)
    1. Change the URL in `src/CNAME` to your domain.
