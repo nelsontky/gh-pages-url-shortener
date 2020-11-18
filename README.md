@@ -18,7 +18,7 @@ This is a minimal URL shortener that can be entirely hosted on GitHub pages.
 
 ## Features
 
-1. Unlike many URL shorteners, this ~~one does not need a database~~ uses a
+1. Unlike many URL shorteners, this one ~~does not need a database~~ uses a
    "database" in the form of GitHub issues and can be entirely hosted on GitHub
    pages.
 
@@ -36,7 +36,7 @@ _Thanks to @kidGodzilla for the pretty neat explanation
 >    via the JSON API, and redirects to the issue title, as a URL.
 > 4. Profit?
 
-## This is so cool! How can I use this?!
+## This is so cool! How can I use this with my own domain?!
 
 Disclaimer: This method of creating a URL shortener is hacky and not meant to be
 reliable or used in production. Do proceed at your own risk!
@@ -58,7 +58,7 @@ reliable or used in production. Do proceed at your own risk!
 1. `npm run deploy`, and your low cost and cool as heck URL shortener will be
    ready for use!
 
-# Featured forks
+## Featured forks
 
 To feature your fork here, edit this section and open a PR!
 
