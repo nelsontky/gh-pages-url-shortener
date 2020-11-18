@@ -4,6 +4,7 @@ function isUrl(url) {
     url
   );
 }
+
 (async function redirect() {
   const location = window.location;
   const issueNumber = location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
