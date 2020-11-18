@@ -18,7 +18,7 @@ This is a minimal URL shortener that can be entirely hosted on GitHub pages.
 
 ## Features
 
-1. Unlike many URL shorteners, this ~~one does not need a database~~ uses a
+1. Unlike many URL shorteners, this one ~~does not need a database~~ uses a
    "database" in the form of GitHub issues and can be entirely hosted on GitHub
    pages.
 
