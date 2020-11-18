@@ -17,14 +17,14 @@ const homepage =
   location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
 
 fetch(GITHUB_ISSUES_LINK + issueNumber)
-  .then(function (response) {
+  .then(function(response) {
     if (response.status !== 200) {
       throw new Error(
         "An error occurred with the GitHub API. Maybe you've exceeded your API limits (60 per hour)"
       );
     }
 
-    response.json().then(function (payload) {
+    response.json().then(function(payload) {
       let { message, title } = payload;
 
       if (message !== "Not Found" && title && isUrl(title)) {
@@ -46,6 +46,6 @@ fetch(GITHUB_ISSUES_LINK + issueNumber)
       }
     });
   })
-  .catch((e) => {
+  .catch(function() {
     location.replace(homepage);
   });
