@@ -46,7 +46,7 @@ reliable or used in production. Do proceed at your own risk!
    1. In your forked repo, **click the Settings tab** and scroll down to the
       GitHub Pages section.
    1. Then select the **main branch** source and click on the **Save** button.
-   1. <img src="https://i.imgur.com/kjinFX9.png" alt="How to create GitHub page" height="240px">
+   1. <img src="https://i.imgur.com/kjinFX9.png" alt="How to create GitHub page" height="96px">
 1. If you are using your own domain:
    1. [Set your domain up for GitHub pages.](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)
    1. Change the URL in `CNAME` to your domain.
