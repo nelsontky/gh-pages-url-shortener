@@ -15,14 +15,9 @@
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
-      function isUrl(url) {
-        // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
-        return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
-          url
-        );
-      }
 
-      function redirect() {
+
+      (function redirect() {
         var location = window.location;
         var issueNumber = location.pathname.split("/")[
           PATH_SEGMENTS_TO_SKIP + 1
@@ -35,7 +30,14 @@
           (location.port ? ":" + location.port : "") +
           "/" +
           location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
-
+        
+        function isUrl(url) {
+          // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
+          return /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
+            url
+          );
+        }
+        
         fetch(GITHUB_ISSUES_LINK + issueNumber)
           .then(function (response) {
             if (!response.ok) {
@@ -48,30 +50,24 @@
               var message = payload.message;
               var title = payload.title;
 
+              // Check if the title of issue is a legitimate URL
               if (message !== "Not Found" && title && isUrl(title)) {
-                // Check if the title of issue is a legitimate URL
                 var url = new URL(title);
 
-                if (
-                  (url.protocol !== "http:" && url.protocol !== "https:") ||
-                  url.host === location.host
-                ) {
-                  // Prevent recursive redirects and XSS
-                  throw new Error("URL to redirect to is invalid!");
+                // Prevent recursive redirects 
+                if (url.host !== location.host) {
+                  location.replace(title);
                 }
-
-                location.replace(title);
-              } else {
-                throw new Error("issueNumber does not exist in gh issues");
+                throw new Error("URL to redirect to is invalid!");
               }
+              throw new Error("issueNumber does not exist in gh issues");
             });
           })
           .catch(function (e) {
+            // alert(e.message);
             location.replace(homepage);
           });
-      }
-
-      redirect();
+      })();
     </script>
   </head>
   <body></body>
