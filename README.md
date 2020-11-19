@@ -10,7 +10,7 @@ entirely on GitHub for free!
 
 And on GitHub trending!
 
-<img src="https://i.imgur.com/q3VvDve.png" alt="GitHub Trending" width="240px">
+<img src="https://i.imgur.com/OkYCSOx.png" alt="GitHub Trending" width="240px">
 
 ## Demo
 
@@ -36,11 +36,10 @@ And on GitHub trending!
 _Thanks to @kidGodzilla for the pretty neat explanation
 [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/5#issuecomment-728040879)._
 
-> 1. CNAME points URL to `gh-pages` branch
-> 2. 404.html handles all requests
-> 3. Small javascript snippet fetches a JSON representation of the GitHub issue
+> 1. 404.html handles all requests
+> 1. Small javascript snippet fetches a JSON representation of the GitHub issue
 >    via the JSON API, and redirects to the issue title, as a URL.
-> 4. Profit?
+> 1. Profit?
 
 ## This is so cool! How can I use this with my own domain?!
 
@@ -76,6 +75,7 @@ be reliable. Do proceed at your own risk!_
 
 To feature your fork here, edit this section and open a PR!
 
-- [eexit/s](https://github.com/eexit/s) - Created a bash script that allows for
-  shortening of URLs straight on the command line! Check out his script
+- [eexit.github.io/s](https://github.com/eexit/s) - Created a bash
+  script that allows for shortening of URLs straight on the command line! Check
+  out his script
   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
