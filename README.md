@@ -32,7 +32,7 @@ And on GitHub trending!
    "database" in the form of GitHub issues and can be entirely hosted on GitHub
    pages.
 
-1. There is no need for the pound symbol - short URLs look clean like this:F
+1. There is no need for the pound symbol - short URLs look clean like this:
    `nlsn.cf/1` instead of looking like this: `nlsn.cf/#1`.
 
 ## 💡 How does this work?
