@@ -44,28 +44,29 @@
               );
             }
 
-            return response
-              .json()
-              .then(function (payload) {
-                var message = payload.message;
-                var title = payload.title;
+            return response.json().then(function (payload) {
+              var message = payload.message;
+              var title = payload.title;
 
-                if (message !== "Not Found" && title && isUrl(title)) {
-                  // Check if the title of issue is a legitimate URL
-                  var url = new URL(title);
-                  if (
-                    (url.protocol.substr(0, 4) !== "http") ||
-                    url.host === location.host
-                  ) {
-                    // Prevent recursive redirects and XSS
-                    throw new Error("URL to redirect to is invalid!");
-                  } 
-                  location.replace(title);
+              if (message !== "Not Found" && title && isUrl(title)) {
+                // Check if the title of issue is a legitimate URL
+                var url = new URL(title);
+
+                if (
+                  (url.protocol !== "http:" && url.protocol !== "https:") ||
+                  url.host === location.host
+                ) {
+                  // Prevent recursive redirects and XSS
+                  throw new Error("URL to redirect to is invalid!");
                 }
+
+                location.replace(title);
+              } else {
                 throw new Error("issueNumber does not exist in gh issues");
-              });
+              }
+            });
           })
-          .catch(function () {
+          .catch(function (e) {
             location.replace(homepage);
           });
       }
