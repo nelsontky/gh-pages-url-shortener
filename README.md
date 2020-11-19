@@ -1,4 +1,8 @@
-# GitHub Pages URL Shortener
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Total Lines](https://img.shields.io/tokei/lines/github/nelsontky/gh-pages-url-shortener?color=green)
+![GitHub stars](https://img.shields.io/github/stars/nelsontky/gh-pages-url-shortener?style=social)
+
+# 🔗 GitHub Pages URL Shortener
 
 This is a minimal URL shortener that can be entirely hosted on GitHub pages. It
 does not need the maintenance of any servers or databases and can be hosted
@@ -12,7 +16,7 @@ And on GitHub trending!
 
 <img src="https://i.imgur.com/OkYCSOx.png" alt="GitHub Trending" width="240px">
 
-## Demo
+## 👨‍🏫 Demo
 
 1. [nlsn.cf/1](https://nlsn.cf/1) should link to this repo.
 
@@ -22,7 +26,7 @@ And on GitHub trending!
 
 1. The newly created short url can be accessed via `nlsn.cf/{issue_number}`
 
-## Features
+## ☕️ Features
 
 1. Unlike many URL shorteners, this one ~~does not need a database~~ uses a
    "database" in the form of GitHub issues and can be entirely hosted on GitHub
@@ -31,7 +35,7 @@ And on GitHub trending!
 1. There is no need for the pound symbol - short URLs look clean like this:F
    `nlsn.cf/1` instead of looking like this: `nlsn.cf/#1`.
 
-## How does this work?
+## 💡 How does this work?
 
 _Thanks to @kidGodzilla for the pretty neat explanation
 [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/5#issuecomment-728040879)._
@@ -41,7 +45,7 @@ _Thanks to @kidGodzilla for the pretty neat explanation
 >    via the JSON API, and redirects to the issue title, as a URL.
 > 1. Profit?
 
-## This is so cool! How can I use this with my own domain?!
+## 😎 This is so cool! How can I use this with my own domain?!
 
 _Disclaimer: This method of creating a URL shortener is hacky and not meant to
 be reliable. Do proceed at your own risk!_
@@ -71,11 +75,11 @@ be reliable. Do proceed at your own risk!_
 1. Push your changes to your forked repo, and your low cost and cool as heck URL
    shortener will be ready for use!
 
-## Featured forks
+## 🍴 Featured forks
 
 To feature your fork here, edit this section and open a PR!
 
-- [eexit.github.io/s](https://github.com/eexit/s) - Created a bash
-  script that allows for shortening of URLs straight on the command line! Check
-  out his script
+- [eexit.github.io/s](https://github.com/eexit/s) - Created a bash script that
+  allows for shortening of URLs straight on the command line! Check out his
+  script
   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
