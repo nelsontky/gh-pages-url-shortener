@@ -1,10 +1,16 @@
 # GitHub Pages URL Shortener
 
-This is a minimal URL shortener that can be entirely hosted on GitHub pages. It does not need the maintenance of any servers or databases and can be hosted entirely on GitHub for free.
+This is a minimal URL shortener that can be entirely hosted on GitHub pages. It
+does not need the maintenance of any servers or databases and can be hosted
+entirely on GitHub for free!
 
 [Yay! We got to the top of HN!](https://news.ycombinator.com/item?id=25110879)
 
 <img src="https://i.imgur.com/ZfD7XGt.png" alt="Top of HN" width="240px">
+
+And on GitHub trending!
+
+<img src="https://i.imgur.com/q3VvDve.png" alt="GitHub Trending" width="240px">
 
 ## Demo
 
@@ -22,7 +28,7 @@ This is a minimal URL shortener that can be entirely hosted on GitHub pages. It 
    "database" in the form of GitHub issues and can be entirely hosted on GitHub
    pages.
 
-1. There is no need for the pound symbol - short URLs look clean like this:
+1. There is no need for the pound symbol - short URLs look clean like this:F
    `nlsn.cf/1` instead of looking like this: `nlsn.cf/#1`.
 
 ## How does this work?
@@ -38,8 +44,8 @@ _Thanks to @kidGodzilla for the pretty neat explanation
 
 ## This is so cool! How can I use this with my own domain?!
 
-Disclaimer: This method of creating a URL shortener is hacky and not meant to be
-reliable or used in production. Do proceed at your own risk!
+_Disclaimer: This method of creating a URL shortener is hacky and not meant to
+be reliable. Do proceed at your own risk!_
 
 1. Fork the repo before cloning your fork.
 1. Set up GitHub pages for your forked repo.
