@@ -36,35 +36,38 @@
           "/" +
           location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
 
-        fetch(GITHUB_ISSUES_LINK + issueNumber)
-          .then(function (response) {
-            if (!response.ok) {
-              throw new Error(
-                "An error occurred with the GitHub API. Maybe you've exceeded your API limits (60 per hour)"
-              );
-            }
+        var xhr = new XMLHttpRequest();
 
-            return response.json().then(function (payload) {
-              var message = payload.message;
-              var title = payload.title;
+        xhr.onload = function () {
+          var payload = JSON.parse(xhr.response);
 
-              // Check if the title of issue is a legitimate URL
-              if (message === "Not Found" || !title || !isUrl(title)) {
-                throw new Error("issueNumber does not exist in gh issues");
-              }
+          var message = payload.message;
+          var title = payload.title;
 
-              // Prevent recursive redirects
-              var url = new URL(title);
-              if (url.host === location.host) {
-                throw new Error("URL to redirect to is invalid!");
-              }
+          // Workaround IE 11 lack of support for new URL()
+          var url = document.createElement("a");
+          url.setAttribute("href", title);
 
-              location.replace(title);
-            });
-          })
-          .catch(function () {
+          // Invalid URLs includes invalid issue numbers, issue titles that are
+          // not URLs, and recursive destination URLs
+          var isInvalidUrl =
+            message === "Not Found" ||
+            !title ||
+            !isUrl(title) ||
+            url.host === location.host;
+            
+          if (isInvalidUrl) {
             location.replace(homepage);
-          });
+          } else {
+            location.replace(title);
+          }
+        };
+
+        xhr.onerror = function () {
+          location.replace(homepage);
+        };
+        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+        xhr.send();
       }
 
       redirect();
