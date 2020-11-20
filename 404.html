@@ -27,7 +27,6 @@
         var issueNumber = location.pathname.split("/")[
           PATH_SEGMENTS_TO_SKIP + 1
         ];
-
         var homepage =
           location.protocol +
           "//" +
@@ -39,27 +38,29 @@
         var xhr = new XMLHttpRequest();
 
         xhr.onload = function () {
-          var payload = JSON.parse(xhr.response);
+          try {
+            var payload = JSON.parse(xhr.response);
+            var message = payload.message;
+            var title = payload.title;
 
-          var message = payload.message;
-          var title = payload.title;
+            // Workaround IE 11 lack of support for new URL()
+            var url = document.createElement("a");
+            url.setAttribute("href", title);
 
-          // Workaround IE 11 lack of support for new URL()
-          var url = document.createElement("a");
-          url.setAttribute("href", title);
+            // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
+            var isInvalidUrl =
+              message === "Not Found" ||
+              !title ||
+              !isUrl(title) ||
+              url.host === location.host;
 
-          // Invalid URLs includes invalid issue numbers, issue titles that are
-          // not URLs, and recursive destination URLs
-          var isInvalidUrl =
-            message === "Not Found" ||
-            !title ||
-            !isUrl(title) ||
-            url.host === location.host;
-            
-          if (isInvalidUrl) {
+            if (isInvalidUrl) {
+              location.replace(homepage);
+            } else {
+              location.replace(title);
+            }
+          } catch (e) {
             location.replace(homepage);
-          } else {
-            location.replace(title);
           }
         };
 
