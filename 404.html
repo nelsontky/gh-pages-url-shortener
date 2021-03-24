@@ -11,6 +11,7 @@
       var GITHUB_ISSUES_LINK =
         "https://api.github.com/repos/nelsontky/gh-pages-url-shortener-db/issues/";
       var PATH_SEGMENTS_TO_SKIP = 0;
+      var ALLOW_NAMED_FROM_OTHERS = true;
 
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
@@ -54,7 +55,13 @@
               // Keyword refers to given name
               for (let i=0; i < payload.length; i++) {
                 let issue = payload[i];
-                if (issue.body == keyword) {
+
+                // Check if author is valid
+                let isValidAuthor =
+                  ALLOW_NAMED_FROM_OTHERS ||
+                  issue.user.login === issue.repository.owner.login;
+                
+                if (issue.body == keyword && isValidAuthor) {
                   link = issue.title;
                   break;
                 }
