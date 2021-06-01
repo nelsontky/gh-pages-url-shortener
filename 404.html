@@ -68,6 +68,10 @@
           location.replace(homepage);
         };
         xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+
+        // UNCOMMENT BELOW TO USE DATABASE IN PRIVATE REPOSITORY (get the token from https://github.com/settings/tokens)
+        //xhr.setRequestHeader("Authorization","token YOUR_PERSONAL_ACCESS_TOKEN")
+
         xhr.send();
       }
 
