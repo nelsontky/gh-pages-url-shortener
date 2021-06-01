@@ -74,7 +74,7 @@ be reliable. Do proceed at your own risk!_
       1. Remember the trailing `/`!
 1. Push your changes to your forked repo, and your low cost and cool as heck URL
    shortener will be ready for use!
-1. If you want to used **private repository** as a database, uncomment [404.html](/404.html) line 73. Then, replace `YOUR_PERSONAL_ACCESS_TOKEN` with token that you get from [here](https://github.com/settings/tokens).
+1. If you want to used **private repository** as a database, uncomment [404.html line 73](404.html#L73). Then, replace `YOUR_PERSONAL_ACCESS_TOKEN` with token that you get from [here](https://github.com/settings/tokens).
 
 ## 🍴 Featured forks
 
