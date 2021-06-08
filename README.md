@@ -84,4 +84,4 @@ To feature your fork here, edit this section and open a PR!
   script
   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
 - [gh-short-url](https://github.com/mayandev/gh-short-url) - A npm command line
-  tool that use github pages to convert short url.
+  tool that uses GitHub pages to convert short URLs.
