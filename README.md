@@ -22,7 +22,7 @@ And on GitHub trending!
 
 1. To add a new short link, add an issue with the title being the link you want
    to shorten (including the `http(s)://`) to
-   [https://github.com/nelsontky/gh-pages-url-shortener-db/issues](https://github.com/nelsontky/gh-pages-url-shortener-db/issues).
+   [https://github.com/andreribas15/gh-pages-url-shortener-db/issues](https://github.com/nelsontky/gh-pages-url-shortener-db/issues).
 
 1. The newly created short url can be accessed via `nlsn.cf/{issue_number}`
 
