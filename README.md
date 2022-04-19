@@ -83,5 +83,6 @@ To feature your fork here, edit this section and open a PR!
   allows for shortening of URLs straight on the command line! Check out his
   script
   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
+  [here](https://github.com/wmz1024-files/gh-pages-url-shortener).
 - [gh-short-url](https://github.com/mayandev/gh-short-url) - A npm command line
   tool that uses GitHub pages to convert short URLs.
