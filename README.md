@@ -85,3 +85,7 @@ To feature your fork here, edit this section and open a PR!
   [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
 - [gh-short-url](https://github.com/mayandev/gh-short-url) - A npm command line
   tool that uses GitHub pages to convert short URLs.
+- [iwill.im/url](https://github.com/iwill/url) - Supports loooong URL by using
+  issue body (or use title if body is not a valid URL, body/title accepts up to
+  65536/256 characters), e.g. [iwill.im/url/2](https://iwill.im/url/2) shortened
+  a super long URL.
