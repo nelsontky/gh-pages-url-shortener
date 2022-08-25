@@ -11,6 +11,7 @@
       var GITHUB_ISSUES_LINK =
         "https://api.github.com/repos/nelsontky/gh-pages-url-shortener-db/issues/";
       var PATH_SEGMENTS_TO_SKIP = 0;
+      var ALLOW_NAMED_FROM_OTHERS = true;
 
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
@@ -22,11 +23,17 @@
         );
       }
 
+      function isNumeric(num){
+        return !isNaN(num)
+      }
+
       function redirect() {
         var location = window.location;
-        var issueNumber = location.pathname.split("/")[
+        var keyword = location.pathname.split("/")[
           PATH_SEGMENTS_TO_SKIP + 1
         ];
+
+        var isQuery = location.href.substr(-1) == "?";
         var homepage =
           location.protocol +
           "//" +
@@ -41,23 +48,47 @@
           try {
             var payload = JSON.parse(xhr.response);
             var message = payload.message;
-            var title = payload.title;
+            if (isNumeric(keyword)) {
+              // Keyword refers to issue number
+              link = payload.title;
+            } else {
+              // Keyword refers to given name
+              for (let i=0; i < payload.length; i++) {
+                let issue = payload[i];
 
+                // Check if author is valid
+                let isValidAuthor =
+                  ALLOW_NAMED_FROM_OTHERS ||
+                  issue.user.login === issue.repository.owner.login;
+                
+                if (issue.body == keyword && isValidAuthor) {
+                  link = issue.title;
+                  break;
+                }
+              }
+            }
             // Workaround IE 11 lack of support for new URL()
             var url = document.createElement("a");
-            url.setAttribute("href", title);
+            url.setAttribute("href", link);
 
             // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
             var isInvalidUrl =
               message === "Not Found" ||
-              !title ||
-              !isUrl(title) ||
+              !link ||
+              !isUrl(link) ||
               url.hostname === location.hostname;
 
             if (isInvalidUrl) {
-              location.replace(homepage);
+              // location.replace(homepage);
             } else {
-              location.replace(title);
+              if (isQuery) {
+                // Show where this link leads
+                var element = document.getElementById("link")
+                element.textContent = link;
+              } else {
+                // Forward to link
+                location.replace(title);
+              }
             }
           } catch (e) {
             location.replace(homepage);
@@ -67,12 +98,23 @@
         xhr.onerror = function () {
           location.replace(homepage);
         };
-        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
+
+        let api_url = GITHUB_ISSUES_LINK;
+        if (isNumeric(keyword)) {
+          // Get /issues/ID
+          api_url += keyword
+        } else {
+          // Get all /issues
+          api_url = api_url.slice(0, -1);
+        }
+        xhr.open("GET", api_url);
         xhr.send();
       }
 
       redirect();
     </script>
   </head>
-  <body></body>
+  <body>
+    Links to <span id="link"></span>
+  </body>
 </html>
