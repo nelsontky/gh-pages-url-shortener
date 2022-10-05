@@ -82,6 +82,7 @@ To feature your fork here, edit this section and open a PR!
 - [eexit.github.io/s](https://github.com/eexit/s) - Created a bash script that
   allows for shortening of URLs straight on the command line! Check out his
   script
-  [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).
+  [here](https://github.com/nelsontky/gh-pages-url-shortener/issues/49#issue-745134937).   
+- [here An update, that requires the owner to close the issue before it can be used](https://github.com/wmz1024-files/gh-pages-url-shortener).
 - [gh-short-url](https://github.com/mayandev/gh-short-url) - A npm command line
   tool that uses GitHub pages to convert short URLs.

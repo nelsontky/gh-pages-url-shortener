@@ -11,6 +11,13 @@
       var GITHUB_ISSUES_LINK =
         "https://api.github.com/repos/nelsontky/gh-pages-url-shortener-db/issues/";
       var PATH_SEGMENTS_TO_SKIP = 0;
+     // Only available after owner closes
+     // example yourGithubName
+     // if you don't need Comment out lines 17, 18, 52, 53, 54, 55, 56
+      var ME =
+          'nelsontky'
+     
+      
 
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
@@ -42,6 +49,11 @@
             var payload = JSON.parse(xhr.response);
             var message = payload.message;
             var title = payload.title;
+            var login = payload.closed_by.login;
+            
+            if (login!=ME){
+              window.replace=homepage; 
+            }
 
             // Workaround IE 11 lack of support for new URL()
             var url = document.createElement("a");
