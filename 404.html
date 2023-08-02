@@ -11,68 +11,75 @@
       var GITHUB_ISSUES_LINK =
         "https://api.github.com/repos/nelsontky/gh-pages-url-shortener-db/issues/";
       var PATH_SEGMENTS_TO_SKIP = 0;
+      // Github username (will only redirect for issues by this user)
+      var ME = "";
 
       /**
        * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
        */
+
+      function isNumeric(num){ return !isNaN(num) }
       function isUrl(url) {
         // Regex from https://stackoverflow.com/a/3809435, with a modification to allow for TLDs of up to 24 characters
-        return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(
-          url
-        );
+        return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(url);
       }
 
-      function redirect() {
-        var location = window.location;
-        var issueNumber = location.pathname.split("/")[
-          PATH_SEGMENTS_TO_SKIP + 1
-        ];
-        var homepage =
-          location.protocol +
-          "//" +
-          location.hostname +
-          (location.port ? ":" + location.port : "") +
-          "/" +
-          location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP];
+      var isQuery = window.location.href.substr(-1) == "?";
+      var keyword = window.location.pathname.split("/")[PATH_SEGMENTS_TO_SKIP + 1];
 
-        var xhr = new XMLHttpRequest();
-
-        xhr.onload = function () {
-          try {
-            var payload = JSON.parse(xhr.response);
-            var message = payload.message;
-            var title = payload.title;
-
-            // Workaround IE 11 lack of support for new URL()
-            var url = document.createElement("a");
-            url.setAttribute("href", title);
-
-            // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
-            var isInvalidUrl =
-              message === "Not Found" ||
-              !title ||
-              !isUrl(title) ||
-              url.hostname === location.hostname;
-
-            if (isInvalidUrl) {
-              location.replace(homepage);
-            } else {
-              location.replace(title);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        var payload = JSON.parse(xhr.response);
+        var issue = "";
+        
+        // keyword is issue number
+        if (isNumeric(keyword)) {
+          issue = payload;
+        // keyword is shortened url name
+        } else {
+          for (var i=0; i<payload.length; i++) {
+            if (payload[i].body == keyword) {
+              // stop searching after first issue that matches
+              issue = payload[i];
+              break;
             }
-          } catch (e) {
-            location.replace(homepage);
           }
-        };
+        }
+        
+        // if something was returned through GH
+        if (issue != "") {
+          // check if author is valid
+          if (issue.user.login == ME) {
+            var url = issue.title;
+          } else {
+            var url = "Failed authentication (GitHub Issue not created by owner of repository)"
+          }
+        } else {
+          // no issue matched
+          var url = "Not found";
+        }
 
-        xhr.onerror = function () {
-          location.replace(homepage);
-        };
-        xhr.open("GET", GITHUB_ISSUES_LINK + issueNumber);
-        xhr.send();
+        // update page
+        document.getElementById("link").textContent = url;
+
+        // if current url ends in '?', just display the full url
+        if (isUrl(url) && !isQuery) {
+          // redirect user
+          window.location.replace(url);
+        }
       }
 
-      redirect();
+      // Send XHR request
+      var api_url = GITHUB_ISSUES_LINK;
+      // Get /issues/ID
+      if (isNumeric(keyword)) { api_url += keyword; }
+      else { api_url = api_url.slice(0, -1); }
+      xhr.open("GET", api_url);
+      xhr.send();
+
     </script>
   </head>
-  <body></body>
+  <body>
+    <h1 id="link">404</h1>
+  </body>
 </html>
